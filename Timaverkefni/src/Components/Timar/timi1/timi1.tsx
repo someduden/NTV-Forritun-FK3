@@ -8,6 +8,7 @@ export default function Timi1() {
 
   return (
     <section className="timi1">
+      <h2>Tími 1 + 2</h2>
       <p>My name: {name}</p>
 
       <Input value={name} onChange={(e) => setName(e.target.value)} />
