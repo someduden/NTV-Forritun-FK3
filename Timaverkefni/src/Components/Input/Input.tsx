@@ -1,4 +1,8 @@
-export function Input({
+import { Input as ShadInput } from "../ui/input";
+
+export const Input = ShadInput;
+
+export function oldInput({
   value,
   onChange,
 }: {

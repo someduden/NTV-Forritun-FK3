@@ -14,8 +14,6 @@ export default function Timi1() {
       <Input value={name} onChange={(e) => setName(e.target.value)} />
 
       <Input value={email} onChange={(e) => setEmail(e.target.value)} />
-
-      <button onClick={() => alert("submitted" + " " + email)}>Submit</button>
     </section>
   );
 }

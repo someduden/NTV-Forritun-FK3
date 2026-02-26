@@ -9,19 +9,28 @@ import {
   CardHeader,
   CardTitle,
 } from "../ui/card";
+import { Button } from "../Button";
 
 export function ShopCard() {
   const [input, setInput] = useState("input text");
+  const [email, setEmail] = useState("");
+
+  const onClick = () => {
+    alert("submitted");
+  };
 
   return (
     <Card>
       <CardHeader>
         <CardTitle>Shopping Card</CardTitle>
         <CardDescription>Card Description</CardDescription>
-        <CardAction>Button?</CardAction>
+        <CardAction>
+          <Button onClick={onClick} />
+        </CardAction>
       </CardHeader>
       <CardContent>
         <Input value={input} onChange={(e) => setInput(e.target.value)} />
+        <Input value={email} onChange={(e) => setEmail(e.target.value)} />
         <p>Card Content</p>
       </CardContent>
       <CardFooter>
