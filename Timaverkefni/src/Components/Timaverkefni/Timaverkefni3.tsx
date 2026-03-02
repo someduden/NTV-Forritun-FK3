@@ -8,7 +8,6 @@ import {
   SelectLabel,
   SelectItem,
 } from "../ui/select";
-import { Button } from "../Button";
 import { Card, CardHeader, CardTitle } from "../ui/card";
 import {
   FieldSet,
@@ -22,6 +21,8 @@ import { Input } from "../ui/input";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { Label } from "../ui/label";
 import { Checkbox } from "../ui/checkbox";
+import { Button } from "../ui/button";
+import { Textarea } from "../ui/textarea";
 
 export function Timaverkefni3() {
   const [fname, setFName] = useState("");
@@ -29,20 +30,34 @@ export function Timaverkefni3() {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [selectedFruit, setSelectedFruit] = useState("");
+  const [savedDate, setSavedDate] = useState("");
+  const [guests, setGuests] = useState(0);
+  const [message, setMessage] = useState("");
+  const [selectedValue, setSelectedValue] = useState("no");
   const [preferences, setPrefrences] = useState({
     newsletter: false,
     promotions: false,
   });
 
+  const increment = () => {
+    setGuests((prevQuantity) => prevQuantity + 1);
+  };
+
+  const decrement = () => {
+    setGuests((prevQuantity) => Math.max(0, prevQuantity - 1));
+  };
+
   return (
-    <Card className="p-6 max-w-md mx-auto">
+    <Card className="p-6 bg-gray-500">
       <CardHeader>
-        <CardTitle>Form</CardTitle>
+        <CardTitle>Heimavinna - Tími 3</CardTitle>
       </CardHeader>
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          window.alert(`${fname} ${lname} + ${email} + ${phone} `);
+          window.alert(
+            `${fname} ${lname} has registered with the email ${email} and phone number ${phone}. They would like to be rewarded with ${selectedFruit} and chose ${selectedValue}. Their scheduled appointment is on ${savedDate} and they will be bringing ${guests} guests with them, Newsletter: ${preferences.newsletter} Promotions: ${preferences.promotions}. They have left the message ${message}.  `,
+          );
         }}
       >
         <FieldSet>
@@ -57,6 +72,7 @@ export function Timaverkefni3() {
                   onChange={(e) => {
                     setFName(e.target.value);
                   }}
+                  className="bg-white"
                 />
                 <Input
                   id="lname"
@@ -65,6 +81,7 @@ export function Timaverkefni3() {
                   onChange={(e) => {
                     setLName(e.target.value);
                   }}
+                  className="bg-white"
                 />
               </div>
 
@@ -77,6 +94,7 @@ export function Timaverkefni3() {
                   onChange={(e) => {
                     setEmail(e.target.value);
                   }}
+                  className="bg-white"
                 />
                 <Input
                   type="number"
@@ -86,9 +104,10 @@ export function Timaverkefni3() {
                   onChange={(e) => {
                     setPhone(e.target.value);
                   }}
+                  className="bg-white"
                 />
               </div>
-              <FieldDescription>
+              <FieldDescription className="text-white">
                 I will collect this for my own personal use.
               </FieldDescription>
 
@@ -99,7 +118,7 @@ export function Timaverkefni3() {
                     setSelectedFruit(e);
                   }}
                 >
-                  <SelectTrigger className="w-full max-w-48">
+                  <SelectTrigger className="w-full max-w-48 bg-white">
                     <SelectValue placeholder="Select a fruit" />
                   </SelectTrigger>
                   <SelectContent>
@@ -120,13 +139,26 @@ export function Timaverkefni3() {
           {/* RADIO BUTTONS */}
           <FieldGroup className="flex flex-col gap-6">
             <Field>
-              <RadioGroup defaultValue="compact" className="flex gap-6">
+              <RadioGroup
+                defaultValue="compact"
+                className="flex gap-6"
+                value={selectedValue}
+                onValueChange={setSelectedValue}
+              >
                 <div className="flex items-center gap-2">
-                  <RadioGroupItem value="option-one" id="option-one" />
+                  <RadioGroupItem
+                    value="yes"
+                    id="option-one"
+                    className="bg-white"
+                  />
                   <Label htmlFor="option-one">Yes</Label>
                 </div>
                 <div className="flex items-center gap-2">
-                  <RadioGroupItem value="option-two" id="option-two" />
+                  <RadioGroupItem
+                    value="no"
+                    id="option-two"
+                    className="bg-white"
+                  />
                   <Label htmlFor="option-two">No</Label>
                 </div>
               </RadioGroup>
@@ -148,6 +180,7 @@ export function Timaverkefni3() {
                         newsletter: !!value,
                       }))
                     }
+                    className="bg-white"
                   />
                   <FieldLabel htmlFor="newsletter-checkbox">
                     Newsletter
@@ -164,6 +197,7 @@ export function Timaverkefni3() {
                         promotions: !!value,
                       }))
                     }
+                    className="bg-white"
                   />
                   <FieldLabel htmlFor="promotions-checkbox">
                     Promotions
@@ -174,7 +208,53 @@ export function Timaverkefni3() {
           </FieldGroup>
         </FieldSet>
 
-        <Button type="submit" />
+        <FieldGroup>
+          <div className="flex flex-col items-start gap-2 pt-4">
+            <Label htmlFor="date">Appointment</Label>
+            <div className="flex flex-row gap-2">
+              <Input
+                type="date"
+                id="date"
+                placeholder="Preferred date (YYYY-MM-DD)"
+                onChange={(e) => {
+                  setSavedDate(e.target.value);
+                }}
+                className="bg-white w-60"
+              />
+
+              <div className="flex flex-row gap-1">
+                <Button type="button" variant="outline" onClick={increment}>
+                  +
+                </Button>
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={decrement}
+                  disabled={guests === 0}
+                >
+                  -
+                </Button>
+                <Label>{`${guests} Guests`}</Label>
+              </div>
+            </div>
+            <div className="flex flex-col pb-4 gap-2">
+              <Label>Leave a message:</Label>
+              <Textarea
+                className="bg-white w-90"
+                placeholder="Enter your message here..."
+                onChange={(e) => {
+                  setMessage(e.target.value);
+                }}
+              />
+            </div>
+          </div>
+        </FieldGroup>
+        <div className="flex flex-col gap-2">
+          <Button variant="secondary">Submit</Button>
+          <Button variant="outline" type="reset">
+            Reset
+          </Button>
+        </div>
       </form>
     </Card>
   );

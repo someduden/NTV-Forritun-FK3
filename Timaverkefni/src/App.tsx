@@ -6,7 +6,7 @@ import { Timaverkefni3 } from "./Components/Timaverkefni/Timaverkefni3";
 
 function App() {
   return (
-    <>
+    <div className="grid gap-5">
       <Timi1 />
 
       {/* Card */}
@@ -16,7 +16,7 @@ function App() {
 
       <h2>Tímaverkefni - Tími 3</h2>
       <Timaverkefni3 />
-    </>
+    </div>
   );
 }
 

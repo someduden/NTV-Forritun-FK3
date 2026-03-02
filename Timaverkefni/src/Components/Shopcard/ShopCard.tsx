@@ -9,7 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from "../ui/card";
-import { Button } from "../Button";
+import { SubmitButton } from "../SubmitButton";
 
 export function ShopCard() {
   const [input, setInput] = useState("input text");
@@ -25,7 +25,7 @@ export function ShopCard() {
         <CardTitle>Shopping Card</CardTitle>
         <CardDescription>Card Description</CardDescription>
         <CardAction>
-          <Button onClick={onClick} />
+          <SubmitButton onClick={onClick} />
         </CardAction>
       </CardHeader>
       <CardContent>

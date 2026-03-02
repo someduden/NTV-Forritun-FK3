@@ -17,7 +17,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
-import { Button } from "./Button";
+import { SubmitButton } from "./SubmitButton";
 
 export function Form() {
   const [myName, setMyName] = useState("Daníel");
@@ -76,7 +76,7 @@ export function Form() {
               </Select>
             </FieldGroup>
           </FieldSet>
-          <Button type="submit" />
+          <SubmitButton type="submit" />
         </form>
       </div>
     </Card>
