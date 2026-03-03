@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from 'react';
 import {
   Select,
   SelectTrigger,
@@ -7,35 +7,53 @@ import {
   SelectGroup,
   SelectLabel,
   SelectItem,
-} from "../ui/select";
-import { Card, CardHeader, CardTitle } from "../ui/card";
+} from '../ui/select';
+import { Card, CardHeader, CardTitle } from '../ui/card';
 import {
   FieldSet,
   FieldGroup,
   Field,
   FieldLabel,
   FieldDescription,
-} from "../ui/field";
-import { Input } from "../ui/input";
-import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
-import { Label } from "../ui/label";
-import { Checkbox } from "../ui/checkbox";
-import { Button } from "../ui/button";
-import { Textarea } from "../ui/textarea";
+} from '../ui/field';
+import { Input } from '../ui/input';
+import { RadioGroup, RadioGroupItem } from '../ui/radio-group';
+import { Label } from '../ui/label';
+import { Checkbox } from '../ui/checkbox';
+import { Button } from '../ui/button';
+import { Textarea } from '../ui/textarea';
+
+type DataType = {
+  fname: string;
+  lname: string;
+  email: string;
+  phone: string;
+  selectedFruit: string;
+  date: string;
+  message: string;
+  radioButton: string;
+  preferences: {
+    newsletter: boolean;
+    promotions: boolean;
+  };
+};
 
 export function Timaverkefni3() {
-  const [fname, setFName] = useState("");
-  const [lname, setLName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [selectedFruit, setSelectedFruit] = useState("");
-  const [savedDate, setSavedDate] = useState("");
   const [guests, setGuests] = useState(0);
-  const [message, setMessage] = useState("");
-  const [selectedValue, setSelectedValue] = useState<string | null>(null);
-  const [preferences, setPrefrences] = useState({
-    newsletter: false,
-    promotions: false,
+
+  const dataRef = useRef<DataType>({
+    fname: '',
+    lname: '',
+    email: '',
+    phone: '',
+    selectedFruit: '',
+    date: '',
+    message: '',
+    radioButton: '',
+    preferences: {
+      newsletter: false,
+      promotions: false,
+    },
   });
 
   const increment = () => {
@@ -52,11 +70,8 @@ export function Timaverkefni3() {
         <CardTitle>Heimavinna - Tími 3</CardTitle>
       </CardHeader>
       <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          window.alert(
-            `${fname} ${lname} has registered with the email ${email} and phone number ${phone}. They would like to be rewarded with ${selectedFruit} and chose ${selectedValue}. Their scheduled appointment is on ${savedDate} and they will be bringing ${guests} guests with them, Newsletter: ${preferences.newsletter} Promotions: ${preferences.promotions}. They have left the message ${message}.  `,
-          );
+        onSubmit={() => {
+          window.alert(JSON.stringify(dataRef.current));
         }}
       >
         <FieldSet>
@@ -69,7 +84,10 @@ export function Timaverkefni3() {
                   autoComplete="off"
                   placeholder="First name"
                   onChange={(e) => {
-                    setFName(e.target.value);
+                    dataRef.current = {
+                      ...dataRef.current,
+                      fname: e.target.value,
+                    };
                   }}
                   className="bg-white"
                 />
@@ -78,7 +96,10 @@ export function Timaverkefni3() {
                   autoComplete="off"
                   placeholder="Last name"
                   onChange={(e) => {
-                    setLName(e.target.value);
+                    dataRef.current = {
+                      ...dataRef.current,
+                      lname: e.target.value,
+                    };
                   }}
                   className="bg-white"
                 />
@@ -91,7 +112,10 @@ export function Timaverkefni3() {
                   autoComplete="off"
                   placeholder="Email"
                   onChange={(e) => {
-                    setEmail(e.target.value);
+                    dataRef.current = {
+                      ...dataRef.current,
+                      email: e.target.value,
+                    };
                   }}
                   className="bg-white"
                 />
@@ -101,7 +125,10 @@ export function Timaverkefni3() {
                   autoComplete="off"
                   placeholder="Mobile number"
                   onChange={(e) => {
-                    setPhone(e.target.value);
+                    dataRef.current = {
+                      ...dataRef.current,
+                      phone: e.target.value,
+                    };
                   }}
                   className="bg-white"
                 />
@@ -114,7 +141,10 @@ export function Timaverkefni3() {
               <FieldGroup>
                 <Select
                   onValueChange={(e) => {
-                    setSelectedFruit(e);
+                    dataRef.current = {
+                      ...dataRef.current,
+                      selectedFruit: e,
+                    };
                   }}
                 >
                   <SelectTrigger className="w-full max-w-48 bg-white">
@@ -141,16 +171,20 @@ export function Timaverkefni3() {
               <RadioGroup
                 defaultValue="compact"
                 className="flex gap-6"
-                value={selectedValue}
-                onValueChange={setSelectedValue}
+                onValueChange={(e) => {
+                  dataRef.current = {
+                    ...dataRef.current,
+                    radioButton: e,
+                  };
+                }}
               >
                 <div className="flex items-center gap-2">
                   <RadioGroupItem value="yes" id="yes" className="bg-white" />
-                  <Label htmlFor="option-one">Yes</Label>
+                  <Label htmlFor="yes">Yes</Label>
                 </div>
                 <div className="flex items-center gap-2">
                   <RadioGroupItem value="no" id="no" className="bg-white" />
-                  <Label htmlFor="option-two">No</Label>
+                  <Label htmlFor="no">No</Label>
                 </div>
               </RadioGroup>
             </Field>
@@ -164,13 +198,10 @@ export function Timaverkefni3() {
                   <Checkbox
                     id="newsletter-checkbox"
                     name="newsletter-checkbox"
-                    checked={preferences.newsletter}
-                    onCheckedChange={(value) =>
-                      setPrefrences((prev) => ({
-                        ...prev,
-                        newsletter: !!value,
-                      }))
-                    }
+                    defaultChecked={dataRef.current.preferences.newsletter}
+                    onCheckedChange={(value) => {
+                      dataRef.current.preferences.newsletter = !!value;
+                    }}
                     className="bg-white"
                   />
                   <FieldLabel htmlFor="newsletter-checkbox">
@@ -181,13 +212,10 @@ export function Timaverkefni3() {
                   <Checkbox
                     id="promotions-checkbox"
                     name="promotions-checkbox"
-                    checked={preferences.promotions}
-                    onCheckedChange={(value) =>
-                      setPrefrences((prev) => ({
-                        ...prev,
-                        promotions: !!value,
-                      }))
-                    }
+                    defaultChecked={dataRef.current.preferences.promotions}
+                    onCheckedChange={(value) => {
+                      dataRef.current.preferences.promotions = !!value;
+                    }}
                     className="bg-white"
                   />
                   <FieldLabel htmlFor="promotions-checkbox">
@@ -208,7 +236,10 @@ export function Timaverkefni3() {
                 id="date"
                 placeholder="Preferred date (YYYY-MM-DD)"
                 onChange={(e) => {
-                  setSavedDate(e.target.value);
+                  dataRef.current = {
+                    ...dataRef.current,
+                    date: e.target.value,
+                  };
                 }}
                 className="bg-white w-60"
               />
@@ -234,7 +265,10 @@ export function Timaverkefni3() {
                 className="bg-white w-90"
                 placeholder="Enter your message here..."
                 onChange={(e) => {
-                  setMessage(e.target.value);
+                  dataRef.current = {
+                    ...dataRef.current,
+                    message: e.target.value,
+                  };
                 }}
               />
             </div>
