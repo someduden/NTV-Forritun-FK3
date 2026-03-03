@@ -15,7 +15,6 @@ import {
   Field,
   FieldLabel,
   FieldDescription,
-  FieldContent,
 } from "../ui/field";
 import { Input } from "../ui/input";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
@@ -33,7 +32,7 @@ export function Timaverkefni3() {
   const [savedDate, setSavedDate] = useState("");
   const [guests, setGuests] = useState(0);
   const [message, setMessage] = useState("");
-  const [selectedValue, setSelectedValue] = useState("no");
+  const [selectedValue, setSelectedValue] = useState<string | null>(null);
   const [preferences, setPrefrences] = useState({
     newsletter: false,
     promotions: false,
@@ -146,19 +145,11 @@ export function Timaverkefni3() {
                 onValueChange={setSelectedValue}
               >
                 <div className="flex items-center gap-2">
-                  <RadioGroupItem
-                    value="yes"
-                    id="option-one"
-                    className="bg-white"
-                  />
+                  <RadioGroupItem value="yes" id="yes" className="bg-white" />
                   <Label htmlFor="option-one">Yes</Label>
                 </div>
                 <div className="flex items-center gap-2">
-                  <RadioGroupItem
-                    value="no"
-                    id="option-two"
-                    className="bg-white"
-                  />
+                  <RadioGroupItem value="no" id="no" className="bg-white" />
                   <Label htmlFor="option-two">No</Label>
                 </div>
               </RadioGroup>
