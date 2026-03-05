@@ -1,11 +1,15 @@
 import './App.css';
-import { ShopCard } from './Components/Shopcard/ShopCard';
+// import { ShopCard } from './Components/Shopcard/ShopCard';
 import { Form } from './Components/Form/Form';
+import { TempForm } from './Components/TempForm';
 
 function App() {
   return (
-    <div className="grid gap-5">
+    <div className="w-full">
+      {/* <ShopCard /> */}
       <Form />
+
+      <TempForm />
     </div>
   );
 }
