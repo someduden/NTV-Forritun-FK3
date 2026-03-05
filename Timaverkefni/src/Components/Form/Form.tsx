@@ -38,7 +38,7 @@ type DataType = {
   };
 };
 
-export function Timaverkefni3() {
+export function Form() {
   const [guests, setGuests] = useState(0);
 
   const dataRef = useRef<DataType>({
