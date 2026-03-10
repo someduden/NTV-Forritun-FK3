@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Input } from "../Input/Input";
+import { useState } from 'react';
+import { Input } from '../Input/Input';
 import {
   Card,
   CardAction,
@@ -8,15 +8,15 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "../ui/card";
-import { SubmitButton } from "../SubmitButton";
+} from '../ui/card';
+import { SubmitButton } from '../Buttons/SubmitButton';
 
 export function ShopCard() {
-  const [input, setInput] = useState("input text");
-  const [email, setEmail] = useState("");
+  const [input, setInput] = useState('input text');
+  const [email, setEmail] = useState('');
 
   const onClick = () => {
-    alert("submitted");
+    alert('submitted');
   };
 
   return (

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { Input } from './Input/Input';
-import { Card, CardHeader, CardTitle } from './ui/card';
-import { Field, FieldGroup, FieldSet } from './ui/field';
+import { Input } from '../Input/Input';
+import { Card, CardHeader, CardTitle } from '../ui/card';
+import { Field, FieldGroup, FieldSet } from '../ui/field';
 import {
   Select,
   SelectContent,
@@ -10,10 +10,10 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from './ui/select';
-import { RadioGroup, RadioGroupItem } from './ui/radio-group';
-import { Label } from './ui/label';
-import { Button } from './ui/button';
+} from '../ui/select';
+import { RadioGroup, RadioGroupItem } from '../ui/radio-group';
+import { Label } from '../ui/label';
+import { Button } from '../ui/button';
 import useDebounce from '@/Hooks/useDebounce';
 
 type FormValuesType = {
