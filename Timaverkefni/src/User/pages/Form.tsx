@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { Input } from '../Input/Input';
-import { Card, CardHeader, CardTitle } from '../ui/card';
-import { Field, FieldGroup, FieldSet } from '../ui/field';
+import { Input } from '@/Shared/components/Input';
+import { Card, CardHeader, CardTitle } from '../../Shared/ui/card';
+import { Field, FieldGroup, FieldSet } from '../../Shared/ui/field';
 import {
   Select,
   SelectContent,
@@ -10,24 +10,16 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from '../ui/select';
-import { RadioGroup, RadioGroupItem } from '../ui/radio-group';
-import { Label } from '../ui/label';
-import { Button } from '../ui/button';
-import useDebounce from '@/Hooks/useDebounce';
-
-type FormValuesType = {
-  firstName: string;
-  lastName: string;
-  email: string;
-  mobileNumber: string;
-  selectedFruit: string;
-  radioButton: string | null;
-};
+} from '../../Shared/ui/select';
+import { RadioGroup, RadioGroupItem } from '../../Shared/ui/radio-group';
+import { Label } from '../../Shared/ui/label';
+import { Button } from '../../Shared/ui/button';
+import useDebounce from '@/User/hooks/useDebounce';
+import type { FormValuesType } from '../types';
 
 type ViewState = 'start' | 'form';
 
-export function TempForm() {
+export function Form() {
   // TODO: Remove ref data set, and only use state to keep track of realtime local data (written in input)
   // NOTE: You might want to detach the email from the data set (since it's used to index the localstorage)
 

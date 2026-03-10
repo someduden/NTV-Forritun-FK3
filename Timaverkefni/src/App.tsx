@@ -1,5 +1,6 @@
 import './App.css';
-import { TempForm } from './Components/Form/Assigment5';
+import { Form } from './User/pages/Form';
+
 // import { ShopCard } from './Components/Shopcard/ShopCard';
 // import { Form } from './Components/Form/Form';
 
@@ -9,7 +10,7 @@ function App() {
       {/* <ShopCard /> */}
       {/* <Form /> */}
 
-      <TempForm />
+      <Form />
     </div>
   );
 }

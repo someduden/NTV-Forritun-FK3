@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Input } from '../Input/Input';
+import { Input } from '@/Shared/components/Input';
 import {
   Card,
   CardAction,
@@ -8,8 +8,8 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '../ui/card';
-import { SubmitButton } from '../Buttons/SubmitButton';
+} from '../Shared/ui/card';
+import { Button } from '@/Shared/components/Button';
 
 export function ShopCard() {
   const [input, setInput] = useState('input text');
@@ -25,7 +25,7 @@ export function ShopCard() {
         <CardTitle>Shopping Card</CardTitle>
         <CardDescription>Card Description</CardDescription>
         <CardAction>
-          <SubmitButton onClick={onClick} />
+          <Button onClick={onClick} />
         </CardAction>
       </CardHeader>
       <CardContent>
