@@ -1,5 +1,5 @@
 import './App.css';
-import { Form } from './User/pages/Form';
+import { Form } from './User/components/Form';
 
 // import { ShopCard } from './Components/Shopcard/ShopCard';
 // import { Form } from './Components/Form/Form';

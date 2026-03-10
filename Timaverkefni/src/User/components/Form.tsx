@@ -16,8 +16,7 @@ import { Label } from '../../Shared/ui/label';
 import { Button } from '../../Shared/ui/button';
 import useDebounce from '@/User/hooks/useDebounce';
 import type { FormValuesType } from '../types';
-
-type ViewState = 'start' | 'form';
+import type { ViewState } from '../types';
 
 export function Form() {
   // TODO: Remove ref data set, and only use state to keep track of realtime local data (written in input)

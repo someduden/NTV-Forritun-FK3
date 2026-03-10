@@ -6,3 +6,5 @@ export type FormValuesType = {
   selectedFruit: string;
   radioButton: string | null;
 };
+
+export type ViewState = 'start' | 'form';
